@@ -1,15 +1,12 @@
+
 import streamlit as st
-from modules.anomaly_detection import AnomalyDetection
+
 from modules.log_loader import LogLoader
 from modules.threat_statistics import ThreatStatistics
 from modules.ip_analysis import IPAnalysis
 from modules.protocol_analysis import ProtocolAnalysis
 from modules.threat_scoring import ThreatScoring
-
-
-# ----------------------------
-# PAGE CONFIG
-# ----------------------------
+from modules.anomaly_detection import AnomalyDetection
 
 st.set_page_config(
     page_title="SOCShield",
@@ -18,35 +15,21 @@ st.set_page_config(
 
 st.title("🛡️ SOCShield Dashboard")
 
-
-# ----------------------------
-# LOAD DATA
-# ----------------------------
-
+# Load Data
 loader = LogLoader(
     "data/cybersecurity_threat_detection_logs.csv"
 )
 
 logs = loader.load_logs()
 
-
-# ----------------------------
-# ANALYSIS MODULES
-# ----------------------------
-
+# Analysis Modules
 stats = ThreatStatistics(logs)
-
 ip_analysis = IPAnalysis(logs)
-
 protocol_analysis = ProtocolAnalysis(logs)
-
 threat_scoring = ThreatScoring(logs)
+anomaly_detector = AnomalyDetection(logs)
 
-
-# ----------------------------
-# DASHBOARD METRICS
-# ----------------------------
-
+# Metrics
 col1, col2, col3 = st.columns(3)
 
 col1.metric(
@@ -64,63 +47,50 @@ col3.metric(
     f"{len(logs[logs['threat_label'] == 'suspicious']):,}"
 )
 
-
-# ----------------------------
-# THREAT DISTRIBUTION
-# ----------------------------
-
+# Threat Distribution
 st.subheader("Threat Distribution")
-
 st.bar_chart(
     stats.threat_distribution()
 )
 
-
-# ----------------------------
-# TOP SOURCE IPS
-# ----------------------------
-
+# Top Source IPs
 st.subheader("Top Source IPs")
-
 st.bar_chart(
     ip_analysis.top_source_ips()
 )
 
+# Top Destination IPs
+st.subheader("Top Targeted Destination IPs")
+st.bar_chart(
+    ip_analysis.top_destination_ips()
+)
 
-# ----------------------------
-# PROTOCOL DISTRIBUTION
-# ----------------------------
-
+# Protocol Distribution
 st.subheader("Protocol Distribution")
-
 st.bar_chart(
     protocol_analysis.protocol_distribution()
 )
 
-
-# ----------------------------
-# HIGH RISK IPS
-# ----------------------------
-
+# High Risk IPs
 st.subheader("Top High-Risk IPs")
 
 risk_data = threat_scoring.calculate_ip_risk()
 
 for ip, score in risk_data:
-
     st.write(
         f"🚨 {ip} — Risk Score: {score}"
     )
-st.subheader("Top Targeted Destination IPs")
 
-st.bar_chart(
-    ip_analysis.top_destination_ips()
-)
-anomaly_detector = AnomalyDetection(logs)
+# Anomaly Detection
 st.subheader("🚨 Detected Anomalies")
 
 anomalies = anomaly_detector.detect_anomalies()
-st.write("Anomaly count:", len(anomalies))
+
+st.write(
+    "Anomaly count:",
+    len(anomalies)
+)
+
 st.dataframe(
     anomalies[
         [
@@ -132,3 +102,4 @@ st.dataframe(
         ]
     ]
 )
+
