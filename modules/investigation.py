@@ -5,28 +5,22 @@ class Investigation:
 
     def investigate_ip(self, ip):
 
-        results = self.df[
+        return self.df[
             self.df["source_ip"] == ip
         ]
-
-        return results
 
     def get_protocols(self, ip):
 
-        results = self.df[
-            self.df["source_ip"] == ip
-        ]
+        records = self.investigate_ip(ip)
 
-        return results["protocol"].value_counts()
+        return records["protocol"].value_counts()
 
     def get_destinations(self, ip):
 
-        results = self.df[
-            self.df["source_ip"] == ip
-        ]
+        records = self.investigate_ip(ip)
 
         return (
-            results["dest_ip"]
+            records["dest_ip"]
             .value_counts()
             .head(5)
         )

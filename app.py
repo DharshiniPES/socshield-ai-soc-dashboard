@@ -1,12 +1,17 @@
 
 import streamlit as st
-
+from modules.investigation import Investigation
 from modules.log_loader import LogLoader
 from modules.threat_statistics import ThreatStatistics
 from modules.ip_analysis import IPAnalysis
 from modules.protocol_analysis import ProtocolAnalysis
 from modules.threat_scoring import ThreatScoring
 from modules.anomaly_detection import AnomalyDetection
+from modules.network_visualization import NetworkVisualization
+from modules.brute_force_detector import BruteForceDetector
+from modules.alert_engine import AlertEngine
+
+
 
 st.set_page_config(
     page_title="SOCShield",
@@ -28,7 +33,11 @@ ip_analysis = IPAnalysis(logs)
 protocol_analysis = ProtocolAnalysis(logs)
 threat_scoring = ThreatScoring(logs)
 anomaly_detector = AnomalyDetection(logs)
-
+network_visualizer = NetworkVisualization(logs)
+bruteforce_detector = BruteForceDetector(logs)
+threat_scoring = ThreatScoring(logs)
+investigator = Investigation(logs)
+alert_engine = AlertEngine(logs)
 # Metrics
 col1, col2, col3 = st.columns(3)
 
@@ -75,7 +84,14 @@ st.bar_chart(
 st.subheader("Top High-Risk IPs")
 
 risk_data = threat_scoring.calculate_ip_risk()
+high_risk_ips = [
+    ip for ip, score in risk_data
+]
 
+selected_ip = st.sidebar.selectbox(
+    "Investigate High-Risk IP",
+    high_risk_ips
+)
 for ip, score in risk_data:
     st.write(
         f"🚨 {ip} — Risk Score: {score}"
@@ -102,4 +118,64 @@ st.dataframe(
         ]
     ]
 )
+st.subheader("🔍 Investigation Panel")
 
+records = investigator.investigate_ip(
+    selected_ip
+)
+
+st.metric(
+    "Events From Selected IP",
+    len(records)
+)
+
+st.write("Protocols Used")
+
+st.bar_chart(
+    investigator.get_protocols(
+        selected_ip
+    )
+)
+
+st.write("Top Targeted Destinations")
+
+st.bar_chart(
+    investigator.get_destinations(
+        selected_ip
+    )
+)
+
+st.write("Recent Activity")
+
+st.dataframe(
+    records.head(20)
+)
+st.metric(
+    "Suspicious Events",
+    len(
+        records[
+            records["threat_label"] != "benign"
+        ]
+    )
+)
+st.subheader("🌐 Attack Network Graph")
+
+fig = network_visualizer.draw_graph(
+    limit=50
+)
+
+st.pyplot(fig)
+st.subheader("🔐 Potential Brute Force Attacks")
+
+attacks = bruteforce_detector.detect_bruteforce()
+
+st.dataframe(
+    attacks.reset_index()
+)
+
+st.subheader("🚨 Security Alerts")
+
+alerts = alert_engine.generate_alerts()
+
+for alert in alerts:
+    st.error(alert)
