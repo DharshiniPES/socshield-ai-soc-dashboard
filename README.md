@@ -1,57 +1,149 @@
-# socshield-ai-soc-dashboard
-# SOCShield
-
-AI-Powered Security Operations Center (SOC) Dashboard for Threat Detection, User Behavior Analytics, and Security Monitoring.
+# SOCShield - AI Powered Security Operations Center Dashboard
 
 ## Overview
 
-SOCShield is a cybersecurity platform designed to simulate real-world Security Operations Center (SOC) workflows.
+SOCShield is an AI-powered Security Operations Center (SOC) Dashboard developed using Python and Streamlit for cybersecurity threat monitoring, investigation, and incident reporting.
 
-The system ingests security logs, detects suspicious activities, performs threat scoring, and provides analysts with actionable insights through an interactive dashboard.
+The system processes cybersecurity log data and provides threat analytics, anomaly detection, risk scoring, alert management, network visualization, and investigation capabilities through an interactive dashboard.
+
+---
 
 ## Features
 
-- Log Ingestion and Parsing
-- Brute Force Attack Detection
-- User Behavior Analytics (UBA)
-- Threat Scoring Engine
-- Anomaly Detection using Machine Learning
-- Explainable Security Alerts
-- Incident Investigation Dashboard
-- PDF Report Generation
+### Threat Analytics
 
-## Tech Stack
+* Threat distribution analysis
+* Malicious event monitoring
+* Suspicious activity tracking
 
-- Python
-- Streamlit
-- SQLite
-- Pandas
-- Scikit-Learn
-- Plotly
-- NetworkX
+### IP Intelligence
+
+* Top source IP analysis
+* Top destination IP analysis
+* High-risk IP identification
+
+### Protocol Analysis
+
+* HTTP
+* HTTPS
+* TCP
+* UDP
+* SSH
+* FTP
+* ICMP monitoring
+
+### Threat Detection
+
+* Risk scoring engine
+* Anomaly detection
+* Brute force attack detection
+
+### Security Operations
+
+* Investigation panel
+* Security alerts
+* Alert history management
+* Analyst notes
+
+### Visualization
+
+* Attack network graph
+* Threat trend analysis
+* Interactive dashboard metrics
+
+### Reporting
+
+* Incident report generation
+* PDF export
+
+---
+
+## Technology Stack
+
+* Python
+* Streamlit
+* Pandas
+* NumPy
+* Scikit-Learn
+* SQLite
+* NetworkX
+* Matplotlib
+* ReportLab
+
+---
+
+## Dataset
+
+Cybersecurity Threat Detection Logs Dataset
+
+Dataset Size:
+
+* Original Dataset: ~6,000,000 records
+* Dashboard Working Dataset: ~100,000 records
+
+---
 
 ## Project Structure
 
-```text
-SOCShield/
-├── app.py
-├── modules/
-├── database/
-├── data/
-├── reports/
-└── screenshots/
+socshield-ai-soc-dashboard/
+
+* app.py
+* requirements.txt
+
+data/
+
+* cybersecurity_threat_detection_logs.csv
+
+modules/
+
+* log_loader.py
+* threat_statistics.py
+* ip_analysis.py
+* protocol_analysis.py
+* threat_scoring.py
+* anomaly_detection.py
+* investigation.py
+* brute_force_detector.py
+* network_visualization.py
+* alert_engine.py
+* threat_trends.py
+* analyst_notes.py
+* report_generator.py
+
+database/
+
+* alerts.db
+* db_manager.py
+
+reports/
+
+* socshield_report.pdf
+
+---
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
-## Future Enhancements
+---
 
-- Threat Intelligence Integration
-- SIEM-style Correlation Rules
-- MITRE ATT&CK Mapping
-- Real-Time Monitoring
-- AI Security Assistant
+## Future Improvements
+
+* Threat intelligence integration
+* Real-time alert streaming
+* SIEM integration
+* User authentication
+* Advanced attack correlation
+* Cloud deployment
+
+---
 
 ## Author
 
-Dharshini V
-Cybersecurity & AI Forensics
+Dharshini
 PES University
+Cybersecurity & AI Forensics Internship Project
+
