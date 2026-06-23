@@ -4,11 +4,11 @@
 
 SOCShield is an AI-powered Security Operations Center (SOC) Dashboard developed using Python and Streamlit for cybersecurity threat monitoring, investigation, alert management, and incident reporting.
 
-The platform processes cybersecurity log data and provides real-time security insights through threat analytics, anomaly detection, risk scoring, network visualization, and investigation workflows.
+The platform analyzes cybersecurity logs and provides security analysts with tools for threat detection, anomaly detection, risk assessment, attack visualization, and incident reporting.
 
 ---
 
-## Features
+## Key Features
 
 ### Threat Analytics
 
@@ -40,14 +40,14 @@ The platform processes cybersecurity log data and provides real-time security in
 ### Visualization
 
 * Attack network graph
-* Threat trends dashboard
+* Threat trend dashboards
 * Interactive security metrics
 
 ### Reporting
 
 * Incident report generation
 * PDF report export
-* Alert history storage using SQLite
+* SQLite-based alert history
 
 ---
 
@@ -67,172 +67,106 @@ The platform processes cybersecurity log data and provides real-time security in
 
 ## Dataset
 
-Cybersecurity Threat Detection Logs Dataset
+**Cybersecurity Threat Detection Logs Dataset**
 
 * Original Dataset Size: ~6,000,000 records
-* Dashboard Working Dataset: ~100,000 records
+* Working Dataset Used: ~100,000 records
 
 ---
 
-## Project Architecture
+## Dashboard Screenshots
 
-Cybersecurity Logs Dataset
+### Dashboard Overview
 
-↓
+![Dashboard Overview](screenshots/dashboard_overview.png)
 
-Log Loader Module
+### High-Risk IP Analysis
 
-↓
+![High-Risk IP Analysis](screenshots/high_risk_ips.png)
 
-Threat Analysis Engine
+### Investigation Panel
 
-* Threat Statistics
-* IP Analysis
-* Protocol Analysis
-* Risk Scoring
-* Anomaly Detection
-* Brute Force Detection
+#### Investigation Dashboard
 
-↓
+![Investigation Dashboard](screenshots/investigation_panel.png)
 
-SOCShield Dashboard
+#### Protocol Analysis
 
-* Threat Trends
-* Investigation Panel
-* Security Alerts
-* Network Visualization
-* Analyst Notes
+![Protocol Analysis](screenshots/investigation_panel2.png)
 
-↓
+#### Recent Activity Analysis
 
-SQLite Database
+![Recent Activity Analysis](screenshots/investigation_panel3.png)
 
-* Alert History
-* Analyst Notes
+### Anomaly Detection
 
-↓
+![Anomaly Detection](screenshots/anomaly_detection.png)
 
-Incident Reports & PDF Export
+### Brute Force Detection
+
+![Brute Force Detection](screenshots/bruteforce_detection.png)
+
+### Security Alerts
+
+![Security Alerts](screenshots/security_alerts.png)
+
+### Alert History
+
+![Alert History](screenshots/alert_history.png)
+
+### Network Visualization
+
+![Network Visualization](screenshots/network_graph.png)
+
+### Threat Trends
+
+![Threat Trends](screenshots/threat_trends.png)
+
+### Analyst Notes
+
+![Analyst Notes](screenshots/analyst_notes.png)
+
+### Incident Report Generator
+
+![Incident Report Generator](screenshots/incident_report_generator.png)
 
 ---
 
 ## Project Structure
 
+```text
 socshield-ai-soc-dashboard/
 
-* app.py
-* requirements.txt
+├── app.py
+├── requirements.txt
 
-data/
+├── data/
+│   └── cybersecurity_threat_detection_logs.csv
 
-* cybersecurity_threat_detection_logs.csv
+├── modules/
+│   ├── log_loader.py
+│   ├── threat_statistics.py
+│   ├── ip_analysis.py
+│   ├── protocol_analysis.py
+│   ├── threat_scoring.py
+│   ├── anomaly_detection.py
+│   ├── investigation.py
+│   ├── brute_force_detector.py
+│   ├── network_visualization.py
+│   ├── alert_engine.py
+│   ├── threat_trends.py
+│   ├── analyst_notes.py
+│   └── report_generator.py
 
-modules/
+├── database/
+│   ├── alerts.db
+│   └── db_manager.py
 
-* log_loader.py
-* threat_statistics.py
-* ip_analysis.py
-* protocol_analysis.py
-* threat_scoring.py
-* anomaly_detection.py
-* investigation.py
-* brute_force_detector.py
-* network_visualization.py
-* alert_engine.py
-* threat_trends.py
-* analyst_notes.py
-* report_generator.py
+├── reports/
+│   └── socshield_report.pdf
 
-database/
-
-* alerts.db
-* db_manager.py
-
-reports/
-
-* socshield_report.pdf
-
-screenshots/
-
----
-
-# Dashboard Screenshots
-
-## Dashboard Overview
-
-![Dashboard Overview](screenshots/dashboard_overview.png)
-
----
-
-## High-Risk IP Analysis
-
-![High Risk IP Analysis](screenshots/high_risk_ips.png)
-
----
-
-## Investigation Panel
-
-### Investigation Dashboard
-
-![Investigation Dashboard](screenshots/investigation_panel.png)
-
-### Protocol Analysis
-
-![Protocol Analysis](screenshots/investigation_panel2.png)
-
-### Recent Activity Analysis
-
-![Recent Activity Analysis](screenshots/investigation_panel3.png)
-
----
-
-## Anomaly Detection
-
-![Anomaly Detection](screenshots/anomaly_detection.png)
-
----
-
-## Brute Force Detection
-
-![Brute Force Detection](screenshots/bruteforce_detection.png)
-
----
-
-## Security Alerts
-
-![Security Alerts](screenshots/security_alerts.png)
-
----
-
-## Alert History
-
-![Alert History](screenshots/alert_history.png)
-
----
-
-## Network Visualization
-
-![Network Graph](screenshots/network_graph.png)
-
----
-
-## Threat Trends
-
-![Threat Trends](screenshots/threat_trends.png)
-
----
-
-## Analyst Notes
-
-![Analyst Notes](screenshots/analyst_notes.png)
-
----
-
-## Incident Report Generator
-
-![Incident Report Generator](screenshots/incident_report_generator.png)
-
----
+└── screenshots/
+```
 
 ## Installation
 
@@ -251,11 +185,10 @@ streamlit run app.py
 
 ## Author
 
-Dharshini
-
+**Dharshini**
 PES University
-
 Cybersecurity & AI Forensics Internship Project
+
 
 
 
