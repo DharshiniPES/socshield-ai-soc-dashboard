@@ -147,3 +147,50 @@ Dharshini
 PES University
 Cybersecurity & AI Forensics Internship Project
 
+## Dashboard Screenshots
+
+### Dashboard Overview
+
+![Dashboard Overview](screenshots/dashboard_overview.png)
+
+### High-Risk IP Analysis
+
+![High Risk IP Analysis](screenshots/high_risk_ips.png)
+
+### Investigation Panel
+
+![Investigation Panel](screenshots/investigation_panel.png)
+
+### Anomaly Detection
+
+![Anomaly Detection](screenshots/anomaly_detection.png)
+
+### Brute Force Detection
+
+![Brute Force Detection](screenshots/bruteforce_detection.png)
+
+### Security Alerts
+
+![Security Alerts](screenshots/security_alerts.png)
+
+### Alert History
+
+![Alert History](screenshots/alert_history.png)
+
+### Network Visualization
+
+![Network Graph](screenshots/network_graph.png)
+
+### Threat Trends
+
+![Threat Trends](screenshots/threat_trends.png)
+
+### Analyst Notes
+
+![Analyst Notes](screenshots/analyst_notes.png)
+
+### Incident Report Generator
+
+![Incident Report Generator](screenshots/incident_report_generator.png)
+
+
