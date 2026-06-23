@@ -2,19 +2,20 @@
 
 ## Overview
 
-SOCShield is an AI-powered Security Operations Center (SOC) dashboard developed using Python and Streamlit. The platform analyzes cybersecurity logs, detects threats, identifies suspicious activity, generates security alerts, and assists analysts during investigations.
+SOCShield is an AI-powered Security Operations Center (SOC) Dashboard developed using Python and Streamlit for cybersecurity threat monitoring, investigation, alert management, and incident reporting.
 
-The system integrates threat analytics, anomaly detection, risk scoring, network visualization, incident reporting, and alert management into a single dashboard.
+The platform processes cybersecurity log data and provides real-time security insights through threat analytics, anomaly detection, risk scoring, network visualization, and investigation workflows.
 
 ---
 
-## Key Features
+## Features
 
 ### Threat Analytics
 
 * Threat distribution analysis
-* Malicious and suspicious event monitoring
-* Threat trend visualization
+* Malicious event monitoring
+* Suspicious activity tracking
+* Threat trend analysis
 
 ### Risk Assessment
 
@@ -31,16 +32,16 @@ The system integrates threat analytics, anomaly detection, risk scoring, network
 ### Investigation Tools
 
 * Investigation panel
-* IP activity analysis
+* Source IP analysis
+* Destination IP analysis
 * Protocol analysis
-* Destination analysis
-* Analyst notes
+* Analyst notes management
 
 ### Visualization
 
-* Network attack graph
-* Threat trend analysis
-* Interactive dashboard metrics
+* Attack network graph
+* Threat trends dashboard
+* Interactive security metrics
 
 ### Reporting
 
@@ -64,19 +65,54 @@ The system integrates threat analytics, anomaly detection, risk scoring, network
 
 ---
 
+## Dataset
+
+Cybersecurity Threat Detection Logs Dataset
+
+* Original Dataset Size: ~6,000,000 records
+* Dashboard Working Dataset: ~100,000 records
+
+---
+
 ## Project Architecture
 
 Cybersecurity Logs Dataset
+
 ↓
-Log Loader
+
+Log Loader Module
+
 ↓
+
 Threat Analysis Engine
+
+* Threat Statistics
+* IP Analysis
+* Protocol Analysis
+* Risk Scoring
+* Anomaly Detection
+* Brute Force Detection
+
 ↓
+
 SOCShield Dashboard
+
+* Threat Trends
+* Investigation Panel
+* Security Alerts
+* Network Visualization
+* Analyst Notes
+
 ↓
-Alerts + Investigation + Reporting
+
+SQLite Database
+
+* Alert History
+* Analyst Notes
+
 ↓
-SQLite Storage + PDF Reports
+
+Incident Reports & PDF Export
 
 ---
 
@@ -120,35 +156,81 @@ screenshots/
 
 ---
 
-## Dashboard Screenshots
+# Dashboard Screenshots
 
-### Dashboard Overview
+## Dashboard Overview
 
 ![Dashboard Overview](screenshots/dashboard_overview.png)
 
-### High-Risk IP Analysis
+---
+
+## High-Risk IP Analysis
 
 ![High Risk IP Analysis](screenshots/high_risk_ips.png)
 
-### Investigation Panel
+---
 
-![Investigation Panel](screenshots/investigation_panel.png)
+## Investigation Panel
 
-### Security Alerts
+### Investigation Dashboard
+
+![Investigation Dashboard](screenshots/investigation_panel.png)
+
+### Protocol Analysis
+
+![Protocol Analysis](screenshots/investigation_panel2.png)
+
+### Recent Activity Analysis
+
+![Recent Activity Analysis](screenshots/investigation_panel3.png)
+
+---
+
+## Anomaly Detection
+
+![Anomaly Detection](screenshots/anomaly_detection.png)
+
+---
+
+## Brute Force Detection
+
+![Brute Force Detection](screenshots/bruteforce_detection.png)
+
+---
+
+## Security Alerts
 
 ![Security Alerts](screenshots/security_alerts.png)
 
-### Threat Trends
+---
+
+## Alert History
+
+![Alert History](screenshots/alert_history.png)
+
+---
+
+## Network Visualization
+
+![Network Graph](screenshots/network_graph.png)
+
+---
+
+## Threat Trends
 
 ![Threat Trends](screenshots/threat_trends.png)
 
-### Analyst Notes
+---
+
+## Analyst Notes
 
 ![Analyst Notes](screenshots/analyst_notes.png)
 
-### Network Graph
+---
 
-![Network Graph](screenshots/network_graph.png)
+## Incident Report Generator
+
+![Incident Report Generator](screenshots/incident_report_generator.png)
 
 ---
 
@@ -170,8 +252,11 @@ streamlit run app.py
 ## Author
 
 Dharshini
+
 PES University
+
 Cybersecurity & AI Forensics Internship Project
+
 
 
 
