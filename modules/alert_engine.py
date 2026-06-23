@@ -13,8 +13,25 @@ class AlertEngine:
 
         for _, row in malicious.head(20).iterrows():
 
+            if row["threat_label"] == "malicious" and row["action"] == "allowed":
+                severity = "CRITICAL"
+
+            elif row["threat_label"] == "malicious":
+                severity = "HIGH"
+
+            elif row["threat_label"] == "suspicious":
+                severity = "MEDIUM"
+
+            else:
+                severity = "LOW"
+
             alerts.append(
-                f"🚨 HIGH RISK | {row['source_ip']} | {row['protocol']} | {row['action']}"
+                {
+                    "severity": severity,
+                    "ip": row["source_ip"],
+                    "protocol": row["protocol"],
+                    "action": row["action"]
+                }
             )
 
         return alerts

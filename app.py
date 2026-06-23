@@ -10,9 +10,9 @@ from modules.anomaly_detection import AnomalyDetection
 from modules.network_visualization import NetworkVisualization
 from modules.brute_force_detector import BruteForceDetector
 from modules.alert_engine import AlertEngine
-
-
-
+from database.db_manager import DBManager
+from modules.report_generator import ReportGenerator
+from datetime import datetime
 st.set_page_config(
     page_title="SOCShield",
     layout="wide"
@@ -38,6 +38,8 @@ bruteforce_detector = BruteForceDetector(logs)
 threat_scoring = ThreatScoring(logs)
 investigator = Investigation(logs)
 alert_engine = AlertEngine(logs)
+db = DBManager()
+report_generator = ReportGenerator()
 # Metrics
 col1, col2, col3 = st.columns(3)
 
@@ -178,4 +180,128 @@ st.subheader("🚨 Security Alerts")
 alerts = alert_engine.generate_alerts()
 
 for alert in alerts:
-    st.error(alert)
+
+    db.insert_alert(
+        alert["ip"],
+        alert["severity"],
+        alert["protocol"],
+        alert["action"]
+    )
+
+    message = (
+        f"{alert['severity']} RISK | "
+        f"{alert['ip']} | "
+        f"{alert['protocol']} | "
+        f"{alert['action']}"
+    )
+
+    if alert["severity"] == "HIGH":
+
+        st.error(message)
+
+    else:
+
+        st.warning(message)
+st.subheader("📜 Alert History")
+
+history = db.get_alerts()
+
+st.dataframe(history)
+
+# ----------------------------
+# INCIDENT REPORT GENERATOR
+# ----------------------------
+
+
+st.subheader("📄 Incident Report Generator")
+
+if st.button(
+    "Generate Incident Report"
+):
+
+    total_events = len(logs)
+
+    malicious_events = len(
+        logs[
+            logs["threat_label"] == "malicious"
+        ]
+    )
+
+    suspicious_events = len(
+        logs[
+            logs["threat_label"] == "suspicious"
+        ]
+    )
+
+    anomaly_count = len(anomalies)
+
+    brute_force_count = len(attacks)
+
+    top_risk_ips = [
+        ip
+        for ip, score in risk_data[:5]
+    ]
+
+    report_id = "SOC-2026-001"
+
+    generated_time = datetime.now().strftime(
+        "%d-%b-%Y %H:%M"
+    )
+
+    report = f"""
+SOCSHIELD INCIDENT REPORT
+
+Report ID: {report_id}
+
+Generated On: {generated_time}
+
+
+EXECUTIVE SUMMARY
+
+Total Security Events: {total_events:,}
+
+Malicious Events: {malicious_events:,}
+
+Suspicious Events: {suspicious_events:,}
+
+Detected Anomalies: {anomaly_count:,}
+
+Potential Brute Force Sources: {brute_force_count:,}
+
+
+TOP HIGH-RISK IPS
+
+{chr(10).join(top_risk_ips)}
+
+
+SECURITY RECOMMENDATIONS
+
+1. Investigate high-risk IPs immediately.
+
+2. Review suspicious network activity.
+
+3. Monitor blocked authentication attempts.
+
+4. Continue anomaly monitoring.
+
+5. Review recurring alerts in alert history.
+"""
+
+    st.text(report)
+
+    filename = report_generator.generate_report(
+        "reports/socshield_report.pdf",
+        report
+    )
+
+    with open(
+        filename,
+        "rb"
+    ) as pdf_file:
+
+        st.download_button(
+            label="📥 Download PDF Report",
+            data=pdf_file,
+            file_name="socshield_report.pdf",
+            mime="application/pdf"
+        )
