@@ -1,60 +1,52 @@
-# SOCShield - AI Powered Security Operations Center Dashboard
+# 🛡️ SOCShield - AI-Powered Security Operations Center Dashboard
 
 ## Overview
 
-SOCShield is an AI-powered Security Operations Center (SOC) Dashboard developed using Python and Streamlit for cybersecurity threat monitoring, investigation, and incident reporting.
+SOCShield is an AI-powered Security Operations Center (SOC) dashboard developed using Python and Streamlit. The platform analyzes cybersecurity logs, detects threats, identifies suspicious activity, generates security alerts, and assists analysts during investigations.
 
-The system processes cybersecurity log data and provides threat analytics, anomaly detection, risk scoring, alert management, network visualization, and investigation capabilities through an interactive dashboard.
+The system integrates threat analytics, anomaly detection, risk scoring, network visualization, incident reporting, and alert management into a single dashboard.
 
 ---
 
-## Features
+## Key Features
 
 ### Threat Analytics
 
 * Threat distribution analysis
-* Malicious event monitoring
-* Suspicious activity tracking
+* Malicious and suspicious event monitoring
+* Threat trend visualization
 
-### IP Intelligence
+### Risk Assessment
 
-* Top source IP analysis
-* Top destination IP analysis
 * High-risk IP identification
+* IP risk scoring engine
+* Threat severity classification
 
-### Protocol Analysis
+### Detection Modules
 
-* HTTP
-* HTTPS
-* TCP
-* UDP
-* SSH
-* FTP
-* ICMP monitoring
-
-### Threat Detection
-
-* Risk scoring engine
 * Anomaly detection
 * Brute force attack detection
+* Security alert generation
 
-### Security Operations
+### Investigation Tools
 
 * Investigation panel
-* Security alerts
-* Alert history management
+* IP activity analysis
+* Protocol analysis
+* Destination analysis
 * Analyst notes
 
 ### Visualization
 
-* Attack network graph
+* Network attack graph
 * Threat trend analysis
 * Interactive dashboard metrics
 
 ### Reporting
 
 * Incident report generation
-* PDF export
+* PDF report export
+* Alert history storage using SQLite
 
 ---
 
@@ -72,14 +64,19 @@ The system processes cybersecurity log data and provides threat analytics, anoma
 
 ---
 
-## Dataset
+## Project Architecture
 
-Cybersecurity Threat Detection Logs Dataset
-
-Dataset Size:
-
-* Original Dataset: ~6,000,000 records
-* Dashboard Working Dataset: ~100,000 records
+Cybersecurity Logs Dataset
+↓
+Log Loader
+↓
+Threat Analysis Engine
+↓
+SOCShield Dashboard
+↓
+Alerts + Investigation + Reporting
+↓
+SQLite Storage + PDF Reports
 
 ---
 
@@ -119,33 +116,9 @@ reports/
 
 * socshield_report.pdf
 
----
-
-## Installation
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
+screenshots/
 
 ---
-
-## Future Improvements
-
-* Threat intelligence integration
-* Real-time alert streaming
-* SIEM integration
-* User authentication
-* Advanced attack correlation
-* Cloud deployment
-
----
-
-## Author
-
-Dharshini
-PES University
-Cybersecurity & AI Forensics Internship Project
 
 ## Dashboard Screenshots
 
@@ -161,25 +134,9 @@ Cybersecurity & AI Forensics Internship Project
 
 ![Investigation Panel](screenshots/investigation_panel.png)
 
-### Anomaly Detection
-
-![Anomaly Detection](screenshots/anomaly_detection.png)
-
-### Brute Force Detection
-
-![Brute Force Detection](screenshots/bruteforce_detection.png)
-
 ### Security Alerts
 
 ![Security Alerts](screenshots/security_alerts.png)
-
-### Alert History
-
-![Alert History](screenshots/alert_history.png)
-
-### Network Visualization
-
-![Network Graph](screenshots/network_graph.png)
 
 ### Threat Trends
 
@@ -189,8 +146,34 @@ Cybersecurity & AI Forensics Internship Project
 
 ![Analyst Notes](screenshots/analyst_notes.png)
 
-### Incident Report Generator
+### Network Graph
 
-![Incident Report Generator](screenshots/incident_report_generator.png)
+![Network Graph](screenshots/network_graph.png)
+
+---
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+## Future Improvements
+
+* Real-time threat monitoring
+* Threat intelligence integration
+* SIEM integration
+* Cloud deployment
+* Advanced attack correlation
+
+## Author
+
+Dharshini
+PES University
+Cybersecurity & AI Forensics Internship Project
+
+
+
 
 
