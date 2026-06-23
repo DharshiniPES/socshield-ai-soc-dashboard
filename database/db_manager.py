@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class DBManager:
 
     def __init__(self):
@@ -21,7 +22,42 @@ class DBManager:
         )
         """)
 
+        self.cursor.execute("""
+        CREATE TABLE IF NOT EXISTS notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ip TEXT,
+            note TEXT
+        )
+        """)
+
         self.conn.commit()
+
+    def alert_exists(
+        self,
+        ip,
+        severity,
+        protocol,
+        action
+    ):
+
+        self.cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM alerts
+            WHERE ip = ?
+            AND severity = ?
+            AND protocol = ?
+            AND action = ?
+            """,
+            (
+                ip,
+                severity,
+                protocol,
+                action
+            )
+        )
+
+        return self.cursor.fetchone()[0] > 0
 
     def insert_alert(
         self,
@@ -30,6 +66,14 @@ class DBManager:
         protocol,
         action
     ):
+
+        if self.alert_exists(
+            ip,
+            severity,
+            protocol,
+            action
+        ):
+            return
 
         self.cursor.execute(
             """
@@ -56,6 +100,37 @@ class DBManager:
 
         self.cursor.execute(
             "SELECT * FROM alerts"
+        )
+
+        return self.cursor.fetchall()
+
+    def insert_note(
+        self,
+        ip,
+        note
+    ):
+
+        self.cursor.execute(
+            """
+            INSERT INTO notes
+            (
+                ip,
+                note
+            )
+            VALUES (?, ?)
+            """,
+            (
+                ip,
+                note
+            )
+        )
+
+        self.conn.commit()
+
+    def get_notes(self):
+
+        self.cursor.execute(
+            "SELECT * FROM notes"
         )
 
         return self.cursor.fetchall()

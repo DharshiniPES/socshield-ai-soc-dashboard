@@ -13,6 +13,8 @@ from modules.alert_engine import AlertEngine
 from database.db_manager import DBManager
 from modules.report_generator import ReportGenerator
 from datetime import datetime
+from modules.threat_trends import ThreatTrends
+from modules.analyst_notes import AnalystNotes
 st.set_page_config(
     page_title="SOCShield",
     layout="wide"
@@ -40,6 +42,8 @@ investigator = Investigation(logs)
 alert_engine = AlertEngine(logs)
 db = DBManager()
 report_generator = ReportGenerator()
+trend_analysis = ThreatTrends(logs)
+notes_manager = AnalystNotes(db)
 # Metrics
 col1, col2, col3 = st.columns(3)
 
@@ -195,13 +199,21 @@ for alert in alerts:
         f"{alert['action']}"
     )
 
-    if alert["severity"] == "HIGH":
+    if alert["severity"] == "CRITICAL":
+
+        st.error("🚨 " + message)
+
+    elif alert["severity"] == "HIGH":
 
         st.error(message)
 
-    else:
+    elif alert["severity"] == "MEDIUM":
 
         st.warning(message)
+
+    else:
+
+        st.info(message)
 st.subheader("📜 Alert History")
 
 history = db.get_alerts()
@@ -305,3 +317,42 @@ SECURITY RECOMMENDATIONS
             file_name="socshield_report.pdf",
             mime="application/pdf"
         )
+st.subheader("📈 Threat Trends")
+
+
+
+st.write("Daily Threat Activity")
+
+st.line_chart(
+    trend_analysis.daily_threats()
+)
+
+
+st.write("Monthly Threat Activity")
+
+st.line_chart(
+    trend_analysis.monthly_threats()
+)
+
+st.subheader("📝 Analyst Notes")
+
+note = st.text_area(
+    "Investigation Notes"
+)
+
+if st.button("Save Note"):
+
+    notes_manager.save_note(
+        selected_ip,
+        note
+    )
+
+    st.success(
+        "Note saved successfully."
+    )
+
+st.write("Saved Notes")
+
+st.dataframe(
+    notes_manager.get_notes()
+)
